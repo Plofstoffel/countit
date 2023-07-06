@@ -1,4 +1,4 @@
-﻿using CountIt.Models;
+﻿using CountIt.Logic;
 
 namespace CountIt.Interfaces
 {

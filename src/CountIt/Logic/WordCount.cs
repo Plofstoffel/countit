@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace CountIt.Models
+﻿namespace CountIt.Logic
 {
 	public class WordCount
 	{

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 [assembly: InternalsVisibleTo("CountIt.UnitTests")]
-namespace CountIt.Models
+namespace CountIt.Logic
 {
 	internal class DefaultWordCounter : WordCounterBase, IWordCounter
 	{

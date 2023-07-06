@@ -1,4 +1,4 @@
-﻿using CountIt.Models;
+﻿using CountIt.Logic;
 
 namespace CountIt.UnitTests
 {
@@ -22,7 +22,7 @@ namespace CountIt.UnitTests
 		public void WhenNullValueIsPassed_ThrowAnException()
 		{
 			//Arrange and Act and Assert
-			Assert.ThrowsException<ArgumentNullException>( () => new WordCount(null));
+			Assert.ThrowsException<ArgumentNullException>(() => new WordCount(null));
 		}
 	}
 }

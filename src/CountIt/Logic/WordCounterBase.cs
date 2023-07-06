@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("CountIt.UnitTests")]
-namespace CountIt.Models
+namespace CountIt.Logic
 {
 	public abstract class WordCounterBase
 	{

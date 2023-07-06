@@ -1,6 +1,6 @@
 ﻿
 using CountIt.Interfaces;
-using CountIt.Models;
+using CountIt.Logic;
 
 namespace CountIt.UnitTests
 {
@@ -108,6 +108,20 @@ namespace CountIt.UnitTests
 
 			// Assert
 			AssertResults(wordCounts, totalWordCount);
+		}
+
+		[TestMethod]
+		public void WhenDefaultWordCounterIsCreatedWithANullAWordValidator_ThrowsAnException()
+		{
+			// Arrange and Assert
+			Assert.ThrowsException<ArgumentNullException>(()=> new DefaultWordCounter(null));
+		}
+
+		[TestMethod]
+		public void WhenLinqWordCounterIsCreatedWithoutAWordValidator_ThrowsAnException()
+		{
+			// Arrange and Assert
+			Assert.ThrowsException<ArgumentNullException>(() => new LinqWordCounter(null));
 		}
 
 		private static void AssertResults(WordCount[] wordCounts, int totalWordCount)
