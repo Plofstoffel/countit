@@ -19,7 +19,7 @@ namespace CountIt.Models
 			var localLowerWords = new string(wordsToCount.Where(c => char.IsLetter(c) || c == ' ').ToArray())
 				.Split(" ")
 				.Select(w => w.ToLower())
-				.Where(w => !string.IsNullOrEmpty(w));
+				.Where(w => _wordValidator.ContainsOnlyLetters(w));
 			return Tuple.Create<WordCount[], int>(localLowerWords.GroupBy(w => w)
 				.Select(g => new WordCount(g.Key) { Count = g.Count() })
 				.OrderBy(t => t.Word)

@@ -9,7 +9,7 @@ namespace CountIt.Models
 	{
 		public bool ContainsOnlyLetters(string word)
 		{
-			return Regex.IsMatch(word, @"^[a-zA-Z]+$");
+			return Regex.IsMatch(word, @"^[a-zA-Z]+$", new RegexOptions(), new TimeSpan(15));
 		}		
 	}
 }

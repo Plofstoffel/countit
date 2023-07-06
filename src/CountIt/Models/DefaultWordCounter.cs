@@ -14,7 +14,7 @@ namespace CountIt.Models
 			_wordValidator = wordValidator ?? throw new ArgumentNullException(nameof(wordValidator));
 		}
 
-		public Tuple<WordCount[], int> CountIt(string input)
+		public Tuple<WordCount[], int> CountIt(string wordsToCount)
 		{
 			string cleanInput = RemoveNonAlphaChars(input);
 			string[] words = cleanInput.Split(' ');

@@ -6,6 +6,6 @@ namespace CountIt.Models
 {
 	public abstract class WordCounterBase
 	{
-		public WordCounterBase(IWordValidator wordValidator) { }
+		protected WordCounterBase(IWordValidator wordValidator) { }
 	}
 }

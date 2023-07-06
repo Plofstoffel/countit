@@ -9,7 +9,9 @@ namespace CountIt.Models
 	{
 		public bool ContainsOnlyLetters(string word)
 		{
-			return !word.Where(c => !char.IsLetter(c)).Any();
+			if (string.IsNullOrEmpty(word)) return false;
+
+			return !word.Any(c => !char.IsLetter(c));
 		}
 	}
 }
