@@ -4,7 +4,7 @@
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello, World!");
+			//Removed code to get first real code coverage.
 		}
 	}
 }
