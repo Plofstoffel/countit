@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/src/.vs
+/src/CountIt/bin/Debug/net6.0
+/src/CountIt/obj
+/tests/CountIt.UnitTests/obj
+/tests/CountIt.UnitTests/bin/Debug/net6.0
