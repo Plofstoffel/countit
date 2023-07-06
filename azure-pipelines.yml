@@ -7,7 +7,9 @@ trigger:
 - main
 
 pool:
-  vmImage: 'windows-latest'
+  name: LocalPool
+  demands:
+   - agent.name -equals Kaboose
 
 variables:
   solution: '**/*.sln'
