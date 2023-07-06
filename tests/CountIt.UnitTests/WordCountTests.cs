@@ -17,5 +17,12 @@ namespace CountIt.UnitTests
 			Assert.AreEqual(word.ToLower(), wordCount.Word);
 			Assert.AreEqual(0, wordCount.Count);
 		}
+
+		[TestMethod]
+		public void WhenNullValueIsPassed_ThrowAnException()
+		{
+			//Arrange and Act and Assert
+			Assert.ThrowsException<ArgumentNullException>( () => new WordCount(null));
+		}
 	}
 }
