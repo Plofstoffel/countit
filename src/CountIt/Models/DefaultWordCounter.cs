@@ -16,7 +16,7 @@ namespace CountIt.Models
 
 		public Tuple<WordCount[], int> CountIt(string wordsToCount)
 		{
-			string cleanInput = RemoveNonAlphaChars(input);
+			string cleanInput = RemoveNonAlphaChars(wordsToCount);
 			string[] words = cleanInput.Split(' ');
 			int totalWordCount = 0;
 			WordCount[] wordCounts = new WordCount[words.Length];
