@@ -22,7 +22,9 @@ namespace CountIt.UnitTests
 		public void WhenNullValueIsPassed_ThrowAnException()
 		{
 			//Arrange and Act and Assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 			Assert.ThrowsException<ArgumentNullException>(() => new WordCount(null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 		}
 	}
 }

@@ -50,7 +50,7 @@ namespace CountIt.Logic
 
 		private string RemoveNonAlphaChars(string words)
 		{
-			StringBuilder sb = new StringBuilder();
+			StringBuilder sb = new();
 
 			foreach (char c in words)
 			{
@@ -93,9 +93,7 @@ namespace CountIt.Logic
 
 		private void Swap(WordCount[] wordCounts, int i, int j)
 		{
-			WordCount temp = wordCounts[i];
-			wordCounts[i] = wordCounts[j];
-			wordCounts[j] = temp;
+			(wordCounts[j], wordCounts[i]) = (wordCounts[i], wordCounts[j]);
 		}
 
 	}

@@ -6,7 +6,7 @@ namespace CountIt.UnitTests
 {
 	[TestClass]
 	public class WordCounterTests
-	{			
+	{
 
 		[TestMethod]
 		public void WhenGivenAString_TheDefaultWordCounter_WithDefaultWordValidator_ShouldReturnCorrectCounts()
@@ -74,7 +74,7 @@ namespace CountIt.UnitTests
 
 			// Assert
 			AssertResults(wordCounts, totalWordCount);
-		}		
+		}
 
 		[TestMethod]
 		public void WhenGivenAString_TheLinqWordCounter_WithLinqWordValidator_ShouldReturnCorrectCounts()
@@ -114,7 +114,7 @@ namespace CountIt.UnitTests
 		public void WhenDefaultWordCounterIsCreatedWithANullAWordValidator_ThrowsAnException()
 		{
 			// Arrange and Assert
-			Assert.ThrowsException<ArgumentNullException>(()=> new DefaultWordCounter(null));
+			Assert.ThrowsException<ArgumentNullException>(() => new DefaultWordCounter(null));
 		}
 
 		[TestMethod]
