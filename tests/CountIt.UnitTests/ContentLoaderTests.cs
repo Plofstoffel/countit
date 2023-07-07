@@ -1,12 +1,7 @@
 ﻿using CountIt.Logic;
 using Moq;
-using System;
-using System.Collections.Generic;
 using System.IO.Abstractions;
 using System.IO.Abstractions.TestingHelpers;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CountIt.UnitTests
 {
@@ -37,7 +32,7 @@ namespace CountIt.UnitTests
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<IOException>();			
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<IOException>();
 
 			//Act and Assert
 			Assert.ThrowsException<IOException>(() => new FileContentLoader(fileSystem));
