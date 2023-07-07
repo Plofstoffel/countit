@@ -37,7 +37,7 @@ namespace CountIt.UnitTests
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllText(It.IsAny<string>())).Throws<IOException>();			
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<IOException>();			
 
 			//Act and Assert
 			Assert.ThrowsException<IOException>(() => new FileContentLoader(fileSystem));
@@ -48,7 +48,7 @@ namespace CountIt.UnitTests
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllText(It.IsAny<string>())).Throws<FileNotFoundException>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<FileNotFoundException>();
 
 			//Act and Assert
 			Assert.ThrowsException<FileNotFoundException>(() => new FileContentLoader(fileSystem));
@@ -59,7 +59,7 @@ namespace CountIt.UnitTests
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllText(It.IsAny<string>())).Throws<DirectoryNotFoundException>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<DirectoryNotFoundException>();
 
 			//Act and Assert
 			Assert.ThrowsException<DirectoryNotFoundException>(() => new FileContentLoader(fileSystem));
