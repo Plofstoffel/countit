@@ -18,7 +18,7 @@ namespace CountIt.Logic
 			{
 				var combinedPath = Path.Combine(path, filename);
 
-				string fileContent = await _fileSystem.File.ReadAllTextAsync(combinedPath);
+				string fileContent = await _fileSystem.File.ReadAllTextAsync(combinedPath, new CancellationToken());
 				return fileContent;
 			}
 			catch (FileNotFoundException e)
