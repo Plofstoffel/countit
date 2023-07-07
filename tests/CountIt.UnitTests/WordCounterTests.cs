@@ -114,14 +114,18 @@ namespace CountIt.UnitTests
 		public void WhenDefaultWordCounterIsCreatedWithANullAWordValidator_ThrowsAnException()
 		{
 			// Arrange and Assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 			Assert.ThrowsException<ArgumentNullException>(() => new DefaultWordCounter(null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 		}
 
 		[TestMethod]
 		public void WhenLinqWordCounterIsCreatedWithoutAWordValidator_ThrowsAnException()
 		{
 			// Arrange and Assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 			Assert.ThrowsException<ArgumentNullException>(() => new LinqWordCounter(null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 		}
 
 		private static void AssertResults(WordCount[] wordCounts, int totalWordCount)
