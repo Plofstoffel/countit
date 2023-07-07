@@ -28,36 +28,57 @@ namespace CountIt.UnitTests
 		}
 
 		[TestMethod]
-		public void WhenCreatingAContentLoaderAndCannotReadFile_ThrowContentException()
+		public async Task WhenCreatingAContentLoaderAndCannotReadFile_ThrowContentException()
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<IOException>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+				.ThrowsAsync(new IOException())
+				.Verifiable();
+			var fileContentLoader = new FileContentLoader(fileSystem);
 
-			//Act and Assert
-			Assert.ThrowsException<IOException>(() => new FileContentLoader(fileSystem));
+			//Act
+			string content = await fileContentLoader.LoadContent("c:\\", "test.txt");
+
+			//Assert
+			Assert.AreEqual(String.Empty, content);
+			Mock.VerifyAll();
 		}
 
 		[TestMethod]
-		public void WhenCreatingAContentLoaderAndCannotFindFile_ThrowFileNotFoundException()
+		public async Task WhenCreatingAContentLoaderAndCannotFindFile_ThrowFileNotFoundException()
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<FileNotFoundException>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+				.ThrowsAsync(new FileNotFoundException())
+				.Verifiable();
+			var fileContentLoader = new FileContentLoader(fileSystem);
 
-			//Act and Assert
-			Assert.ThrowsException<FileNotFoundException>(() => new FileContentLoader(fileSystem));
+			//Act
+			string content = await fileContentLoader.LoadContent("c:\\", "test.txt");
+
+			//Assert
+			Assert.AreEqual(String.Empty, content);
+			Mock.VerifyAll();
 		}
 
 		[TestMethod]
-		public void WhenCreatingAContentLoaderAndCannotFindDirectory_ThrowDirectoryNotFoundException()
+		public async Task WhenCreatingAContentLoaderAndCannotFindDirectory_ThrowDirectoryNotFoundException()
 		{
 			//Arrange
 			var fileSystem = Mock.Of<IFileSystem>();
-			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>())).Throws<DirectoryNotFoundException>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+				.ThrowsAsync(new DirectoryNotFoundException())
+				.Verifiable();
+			var fileContentLoader = new FileContentLoader(fileSystem);
 
-			//Act and Assert
-			Assert.ThrowsException<DirectoryNotFoundException>(() => new FileContentLoader(fileSystem));
+			//Act
+			string content = await fileContentLoader.LoadContent("c:\\", "test.txt");
+
+			//Assert
+			Assert.AreEqual(String.Empty, content);
+			Mock.VerifyAll();
 		}
 
 		[TestMethod]
