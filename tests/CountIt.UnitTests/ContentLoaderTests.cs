@@ -14,17 +14,18 @@ namespace CountIt.UnitTests
 		public async Task WhenCreatingAContentLoader_TheAsyncContentIsReturned()
 		{
 			//Arrange
-			var fileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
-			{
-				{ @"c:\test.txt", new MockFileData(_content) }
-			});
+			var fileSystem = Mock.Of<IFileSystem>();
+			Mock.Get(fileSystem).Setup(f => f.File.ReadAllTextAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+				.ReturnsAsync(_content)
+				.Verifiable();
 			var fileContentLoader = new FileContentLoader(fileSystem);
 
 			//Act
-			string content = await fileContentLoader.LoadContent("c:\\", "test.txt");
+			string content = await fileContentLoader.LoadContent("c:", "test.txt");
 
 			//Assert
 			Assert.AreEqual(_content, content);
+			Mock.VerifyAll();
 		}
 
 		[TestMethod]
