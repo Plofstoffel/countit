@@ -7,17 +7,17 @@ namespace CountIt.UnitTests
 	[TestClass]
 	public class WordCounterTests
 	{
+		private const string _input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
 
 		[TestMethod]
 		public void WhenGivenAString_TheDefaultWordCounter_WithDefaultWordValidator_ShouldReturnCorrectCounts()
 		{
 			// Arrange
 			IWordValidator wordValidator = new DefaultWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
@@ -30,11 +30,10 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new LinqWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
@@ -47,11 +46,10 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new RegexWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
@@ -64,11 +62,10 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new DefaultWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new LinqWordCounter(wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
@@ -81,11 +78,10 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new LinqWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new LinqWordCounter(wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
@@ -98,11 +94,10 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator _wordValidator = new RegexWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(_wordValidator);
-			string input = "The big brown fox number 4 jumped over the lazy dog. THE BIG BROWN FOX JUMPED OVER THE LAZY DOG. The Big Brown Fox 123.";
+			IWordCounter wordCounter = new LinqWordCounter(_wordValidator);			
 
 			// Act
-			Tuple<WordCount[], int> result = wordCounter.CountIt(input);
+			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
 			WordCount[] wordCounts = result.Item1;
 			int totalWordCount = result.Item2;
 
