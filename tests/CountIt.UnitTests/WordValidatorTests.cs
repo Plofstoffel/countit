@@ -12,6 +12,7 @@ namespace CountIt.UnitTests
 		[DataRow("RandomWord122", false)]
 		[DataRow("RandomWord ", false)]
 		[DataRow(" ", false)]
+		[DataRow("", false)]
 		public void WhenUsingDefaultValidator_TheWordIsValid(string word, bool isValid)
 		{
 			//Arrange
@@ -30,6 +31,7 @@ namespace CountIt.UnitTests
 		[DataRow("RandomWord122", false)]
 		[DataRow("RandomWord ", false)]
 		[DataRow(" ", false)]
+		[DataRow("", false)]
 		public void WhenUsingLinqValidator_TheWordIsValid(string word, bool isValid)
 		{
 			//Arrange
