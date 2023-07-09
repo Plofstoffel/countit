@@ -6,6 +6,13 @@ namespace CountIt.Logic
 {
 	public abstract class WordCounterBase
 	{
-		protected WordCounterBase(IWordValidator wordValidator) { }
+		protected readonly IPunctuationRemover _punctuationRemover;
+		protected readonly IWordValidator _wordValidator;
+
+		protected WordCounterBase(IPunctuationRemover punctuationRemover, IWordValidator wordValidator)
+		{
+			_punctuationRemover = punctuationRemover ?? throw new ArgumentNullException(nameof(punctuationRemover));
+			_wordValidator = wordValidator ?? throw new ArgumentNullException(nameof(wordValidator));
+		}
 	}
 }

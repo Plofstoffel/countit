@@ -14,7 +14,8 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new DefaultWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+			IWordCounter wordCounter = new DefaultWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -30,7 +31,8 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new LinqWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+			IWordCounter wordCounter = new DefaultWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -46,7 +48,8 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new RegexWordValidator();
-			IWordCounter wordCounter = new DefaultWordCounter(wordValidator);			
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+			IWordCounter wordCounter = new DefaultWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -62,7 +65,8 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new DefaultWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(wordValidator);			
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();			
+			IWordCounter wordCounter = new LinqWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -78,7 +82,8 @@ namespace CountIt.UnitTests
 		{
 			// Arrange
 			IWordValidator wordValidator = new LinqWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(wordValidator);			
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+			IWordCounter wordCounter = new LinqWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -93,8 +98,9 @@ namespace CountIt.UnitTests
 		public void WhenGivenAString_TheLinqWordCounter_WithRegexWordValidator_ShouldReturnCorrectCounts()
 		{
 			// Arrange
-			IWordValidator _wordValidator = new RegexWordValidator();
-			IWordCounter wordCounter = new LinqWordCounter(_wordValidator);			
+			IWordValidator wordValidator = new RegexWordValidator();
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+			IWordCounter wordCounter = new LinqWordCounter(punctuationRemover, wordValidator);
 
 			// Act
 			Tuple<WordCount[], int> result = wordCounter.CountIt(_input);
@@ -106,20 +112,50 @@ namespace CountIt.UnitTests
 		}
 
 		[TestMethod]
-		public void WhenDefaultWordCounterIsCreatedWithANullAWordValidator_ThrowsAnException()
+		public void WhenDefaultWordCounterIsCreatedWithANullPunctuationRemover_ThrowsAnException()
 		{
-			// Arrange and Assert
+			// Arrange
+			IWordValidator wordValidator = new DefaultWordValidator();
+
+			// Assert
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-			Assert.ThrowsException<ArgumentNullException>(() => new DefaultWordCounter(null));
+			Assert.ThrowsException<ArgumentNullException>(() => new DefaultWordCounter(null, wordValidator));
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 		}
 
 		[TestMethod]
-		public void WhenLinqWordCounterIsCreatedWithoutAWordValidator_ThrowsAnException()
+		public void WhenDefaultWordCounterIsCreatedWithANullWordValidator_ThrowsAnException()
 		{
-			// Arrange and Assert
+			// Arrange
+			IPunctuationRemover punctuationRemover = new DefaultPunctuationRemover();
+
+			// Assert
 #pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
-			Assert.ThrowsException<ArgumentNullException>(() => new LinqWordCounter(null));
+			Assert.ThrowsException<ArgumentNullException>(() => new DefaultWordCounter(punctuationRemover, null));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+		}
+
+		[TestMethod]
+		public void WhenLinqWordCounterIsCreatedWithANullPunctuationRemover_ThrowsAnException()
+		{
+			// Arrange			
+			IWordValidator wordValidator = new DefaultWordValidator();
+
+			// Assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+			Assert.ThrowsException<ArgumentNullException>(() => new LinqWordCounter(null, wordValidator));
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+		}
+
+		[TestMethod]
+		public void WhenLinqWordCounterIsCreatedWithANullWordValidator_ThrowsAnException()
+		{
+			// Arrange
+			IWordValidator wordValidator = new DefaultWordValidator();
+
+			// Assert
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+			Assert.ThrowsException<ArgumentNullException>(() => new LinqWordCounter(null, wordValidator));
 #pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 		}
 

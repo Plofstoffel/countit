@@ -7,16 +7,13 @@ namespace CountIt.Logic
 {
 	internal class LinqWordCounter : WordCounterBase, IWordCounter
 	{
-		private readonly IWordValidator _wordValidator;
-
-		public LinqWordCounter(IWordValidator wordValidator) : base(wordValidator)
-		{
-			_wordValidator = wordValidator ?? throw new ArgumentNullException(nameof(wordValidator));
+		public LinqWordCounter(IPunctuationRemover punctuationRemover, IWordValidator wordValidator) : base(punctuationRemover, wordValidator)
+		{			
 		}
 
 		public Tuple<WordCount[], int> CountIt(string wordsToCount)
 		{
-			var localLowerWords = new string(wordsToCount.Where(c => char.IsLetter(c) || c == ' ').ToArray())
+			var localLowerWords = _punctuationRemover.RemoveAllPunctuation(wordsToCount)
 				.Split(" ")
 				.Select(w => w.ToLower())
 				.Where(w => _wordValidator.ContainsOnlyLetters(w));

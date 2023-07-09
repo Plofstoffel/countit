@@ -1,22 +1,18 @@
 ﻿using CountIt.Interfaces;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 [assembly: InternalsVisibleTo("CountIt.UnitTests")]
 namespace CountIt.Logic
 {
 	internal class DefaultWordCounter : WordCounterBase, IWordCounter
 	{
-		private readonly IWordValidator _wordValidator;
-
-		public DefaultWordCounter(IWordValidator wordValidator) : base(wordValidator)
-		{
-			_wordValidator = wordValidator ?? throw new ArgumentNullException(nameof(wordValidator));
+		public DefaultWordCounter(IPunctuationRemover punctuationRemover, IWordValidator wordValidator) : base(punctuationRemover, wordValidator)
+		{	
 		}
 
 		public Tuple<WordCount[], int> CountIt(string wordsToCount)
 		{
-			string cleanInput = RemoveNonAlphaChars(wordsToCount);
+			string cleanInput = _punctuationRemover.RemoveAllPunctuation(wordsToCount);
 			string[] words = cleanInput.Split(' ');
 			int totalWordCount = 0;
 			WordCount[] wordCounts = new WordCount[words.Length];
@@ -46,21 +42,6 @@ namespace CountIt.Logic
 			QuickSort(wordCounts, 0, wordCounts.Length - 1);
 
 			return Tuple.Create(wordCounts, totalWordCount);
-		}
-
-		private string RemoveNonAlphaChars(string words)
-		{
-			StringBuilder sb = new();
-
-			foreach (char c in words)
-			{
-				if (char.IsLetter(c) || c == ' ')
-				{
-					sb.Append(c);
-				}
-			}
-
-			return sb.ToString();
 		}
 
 		private void QuickSort(WordCount[] wordCounts, int low, int high)
